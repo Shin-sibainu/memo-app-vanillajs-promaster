@@ -44,7 +44,8 @@ export default class NotesView {
     //   this._createListItemHTML(300, "こんにちは", "挨拶をしました", new Date())
     // );
 
-    //デフォルトではノートプレビューを隠す。
+    //Todo : デフォルトではノートプレビューを隠す。
+    // this.updateNotePreviewVisibility(false);
   }
 
   _createListItemHTML(id, title, body, updated) {
@@ -89,9 +90,39 @@ export default class NotesView {
     notesListContainer
       .querySelectorAll(".notesList-item")
       .forEach((noteListItem) => {
-        noteListItem.addEventListener("click", () =>
-          this.onNoteSelect(noteListItem.dataset.noteId)
-        );
+        noteListItem.addEventListener("click", () => {
+          // console.log(noteListItem.dataset);
+          this.onNoteSelect(noteListItem.dataset.noteId);
+        });
+
+        noteListItem.addEventListener("dblclick", () => {
+          const doDelete = confirm("本当にこのメモを削除していいですか？");
+
+          if (doDelete) {
+            this.onNoteDelete(noteListItem.dataset.noteId);
+          }
+        });
       });
+  }
+
+  updateActiveNote(note) {
+    //メモ書く欄に表示する
+    this.root.querySelector(".notesTitle").value = note.title;
+    this.root.querySelector(".notesBody").value = note.body;
+
+    this.root.querySelectorAll(".notesList-item").forEach((noteListItem) => {
+      noteListItem.classList.remove("notesList-item--selected");
+    });
+
+    this.root
+      .querySelector(`.notesList-item[data-note-id="${note.id}"]`)
+      .classList.add("notesList-item--selected");
+  }
+
+  //プレビューを見せるかどうかの処理
+  updateNotePreviewVisibility(visible) {
+    this.root.querySelector(".notesPreview").style.visibility = visible
+      ? "visible"
+      : "hidden";
   }
 }

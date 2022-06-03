@@ -17,6 +17,7 @@ const view = new NotesView(app, {
   // },
   onNoteSelect(id) {
     console.log(id + "のノートが選択されました");
+    view.updateActiveNote(notes[0]);
   },
   onNoteAdd() {
     console.log("ノートが追加されました");
@@ -25,6 +26,13 @@ const view = new NotesView(app, {
     console.log(newTitle);
     console.log(newBody);
   },
+  onNoteDelete(id) {
+    console.log(id + "のノートが削除されました");
+  },
 });
 
-view.updateNoteList(NotesAPI.getAllNotes());
+const notes = NotesAPI.getAllNotes();
+
+//サイドバーにメモを全て表示
+view.updateNoteList(notes);
+// view.updateActiveNote(notes[0]);
