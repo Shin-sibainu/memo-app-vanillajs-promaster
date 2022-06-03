@@ -12,8 +12,11 @@ import NotesView from "./NotesView.js";
 const app = document.getElementById("app");
 //インスタンス化
 const view = new NotesView(app, {
-  onNoteSelect() {
-    console.log("ノートが選択されました。");
+  // onNoteSelect() {
+  //   console.log("ノートが選択されました。");
+  // },
+  onNoteSelect(id) {
+    console.log(id + "のノートが選択されました");
   },
   onNoteAdd() {
     console.log("ノートが追加されました");
@@ -23,3 +26,5 @@ const view = new NotesView(app, {
     console.log(newBody);
   },
 });
+
+view.updateNoteList(NotesAPI.getAllNotes());
