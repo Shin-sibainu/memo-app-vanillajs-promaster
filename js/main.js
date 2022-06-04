@@ -1,14 +1,6 @@
 import NotesAPI from "./NotesAPI.js";
 import NotesView from "./NotesView.js";
 
-// NotesAPI.saveNote({
-//   id: 123456,
-//   title: "wwww更新したのノート",
-//   body: "これは更新したのノートです。",
-// });
-
-// NotesAPI.deleteNote(123456);
-
 const app = document.getElementById("app");
 //インスタンス化
 const view = new NotesView(app, {
