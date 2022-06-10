@@ -114,6 +114,8 @@ export default class NotesView {
       noteListItem.classList.remove("notesList-item--selected");
     });
 
+    console.log(note);
+
     this.root
       .querySelector(`.notesList-item[data-note-id="${note.id}"]`)
       .classList.add("notesList-item--selected");
